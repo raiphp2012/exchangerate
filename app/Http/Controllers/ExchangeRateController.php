@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ExchangeRate;
+use App\ExchangeRate;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -10,12 +10,22 @@ class ExchangeRateController extends Controller
 {
     public function index()
     {
+        // Set your API key
+        $apiKey = 'yCSXjsFhONQ5pjDNc9py2uOIzLeqnq1o';
         // Make API request to get the latest exchange rate
         $client = new Client();
-        $response = $client->get('https://api.exchangeratesapi.io/latest?base=INR&symbols=EUR');
+        $response = $client->get('https://api.apilayer.com/exchangerates_data/latest?base=INR&symbols=EUR',[
+            'headers' => [
+                'apikey' => $apiKey,
+            ],
+        ]);
         $data = json_decode($response->getBody(), true);
-        $currentRate = $data['rates']['EUR'];
+        //dd($data);
+        $currentRate=0.00;
+        if(array_key_exists('rates',$data)){
+            $currentRate = $data['rates']['EUR'];
 
+        }
         // Save the current exchange rate in the database as the latest rate
         ExchangeRate::create([
             'rate' => $currentRate
