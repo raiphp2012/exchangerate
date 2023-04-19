@@ -15,7 +15,7 @@ class CreateExchangeRatesTable extends Migration
     {
         Schema::create('exchange_rates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('rate', 8, 2);
+            $table->double('rate', 10, 6);
             $table->timestamps();
         });
     }
