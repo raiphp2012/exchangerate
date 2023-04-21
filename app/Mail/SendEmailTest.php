@@ -16,8 +16,10 @@ class SendEmailTest extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    protected $user;
+    public function __construct($request)
     {
+        $this->user=$request; 
           
     }
   
@@ -28,6 +30,8 @@ class SendEmailTest extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.test');
+        return $this->view('emails.test')->with([
+                'email_token' => $this->user['email_token']
+            ]);
     }
 }

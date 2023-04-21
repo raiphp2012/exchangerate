@@ -4,8 +4,17 @@
 
 <div class="container">
     <div class="row justify-content-center">
+        
         <div class="col-md-4">
-        <h2>Send Email using Laravel Email Queue</h2>
+        <h2> Email Verification</h2>
+
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
+                
+                    <p>{!! \Session::get('success') !!}</p>
+                
+            </div>
+        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -18,14 +27,9 @@
             <form action="{{route('email.store')}}" method="post">
             @csrf
                 <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" placeholder="Title" class="form-control"/>
+                    <label for="name">Name</label>
+                    <input type="text" name="name" placeholder="Name" class="form-control"/>
                 </div>
-                <div class="form-group">
-                    <label for="body">Body</label>
-                    <input type="text" name="body" placeholder="Body" class="form-control"/>
-                </div>
-
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" placeholder="Enter Email" class="form-control"/>

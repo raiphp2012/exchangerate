@@ -11,18 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::prefix('email')->group(function () {
     Route::get('/','EmailController@index')->name('email.index');
     Route::post('/email','EmailController@store')->name('email.store');
 });
 
-
+Route::get('/verifyemail/{token}', 'EmailController@verify');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/exchange-rate', 'ExchangeRateController@index');
