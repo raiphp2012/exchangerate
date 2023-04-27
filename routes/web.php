@@ -27,3 +27,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/exchange-rate', 'ExchangeRateController@index');
+
+
+Route::post('/doctor/update-availability/{doctorId}', 'DoctorController@updateAvailability')->name('doctor.updateAvailability');
